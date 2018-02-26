@@ -3,7 +3,7 @@ server:
 
 logging:
   level:
-    root: INFO
+    root: DEBUG
     org.springframework.web: ERROR
     org.hibernate: ERROR
     com.sample: DEBUG

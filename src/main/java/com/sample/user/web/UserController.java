@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sample.user.commands.CreateUser;
 import com.sample.user.commands.DeleteUser;
+import com.sample.user.crypto.PasswordHashGenerator;
 import com.sample.user.query.User;
 import com.sample.user.query.UserRepository;
 import com.sample.user.snapshot.UserSnapshotter;
@@ -26,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 public class UserController {
-    
+
     @Autowired
     private CommandGateway commandGateway;
 
@@ -35,6 +36,9 @@ public class UserController {
 
     @Autowired
     private UserSnapshotter shotter;
+
+    @Autowired
+    private PasswordHashGenerator hashGen;
 
     @PostMapping
     public CompletableFuture<Object> createUser(@RequestBody Map<String, String> request) {
@@ -72,6 +76,13 @@ public class UserController {
     public void snapshot(@PathVariable String id) {
 
         shotter.createSnapshot(id);
+
+    }
+
+    @GetMapping("/testPassword/{password}")
+    public String testPasswordHashBeanIsAvailable(@PathVariable String password) {
+
+        return hashGen.generatePasswordHash(password);
 
     }
 }

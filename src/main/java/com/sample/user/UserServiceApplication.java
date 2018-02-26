@@ -8,9 +8,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.sample.user.crypto.PBKDF2SaltedPasswordHashGenerator;
-import com.sample.user.crypto.PasswordHashGenerator;
-
 @SpringBootApplication
 public class UserServiceApplication {
 
@@ -18,11 +15,11 @@ public class UserServiceApplication {
         SpringApplication.run(UserServiceApplication.class, args);
     }
 
-    @Bean
+    //@Bean
     //@ConditionalOnMissingBean
-    public PasswordHashGenerator passwordHashGenerator() {
-        return new PBKDF2SaltedPasswordHashGenerator();
-    }
+    //public PasswordHashGenerator passwordHashGenerator() {
+    //    return new PBKDF2SaltedPasswordHashGenerator();
+    //}
 
     @Bean
     public AggregateFactory<UserAggregate> userAggregateFactory() {
